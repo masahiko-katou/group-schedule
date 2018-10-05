@@ -1,0 +1,39 @@
+<div class="text-center">
+  <h1>会員登録</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <%= form_for(@user) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+
+      <div class="form-group">
+        <%= f.label :name, 'ユーザー名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, 'メールアドレス' %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, 'パスワード' %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, 'パスワード(確認)' %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :part, '担当楽器' %>
+        <%= f.select(:part, [['ヴァイオリン', 1], ['ヴィオラ', 2], ['チェロ', 3], ['コントラバス', 4], ['フルート', 5],['オーボエ', 6], ['クラリネット', 7], ['ファゴット', 8], ['ホルン', 9], ['トランペット', 10], ['トロンボーン', 11], ['チューバ', 12], ['その他', 13]]) %>
+      </div>
+
+      <%= f.submit '登録', class: 'btn btn-primary btn-ms' %>
+    <% end %>
+  </div>
+</div>
