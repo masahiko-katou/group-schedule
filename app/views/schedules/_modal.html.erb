@@ -1,0 +1,40 @@
+<% if current_user.reaction?(schedule) %>
+  <%= form_for(current_user.answers.find_by(reaction_id: schedule.id), html: {method: :delete}) do |f| %>
+    <%= hidden_field_tag :reaction_id, schedule.id %>
+      <%= f.submit 'リセット', class: 'btn btn-danger btn-xs' %>
+  <% end %>
+<% else %>
+  <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-sample">回答する</button>
+  <div class="modal" id="modal-sample" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                <h4 class="modal-title" id="modal-label"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+              <%= form_for(current_user.answers.build) do |f| %>
+                <%= hidden_field_tag :reaction_id, schedule.id %>
+                <div class="form-group">
+                  <%= f.label :status, 'ステータス' %>
+                  <%= f.text_field :status, class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :comment, 'コメント' %>
+                  <%= f.text_field :comment, class: 'form-control' %>
+                </div>
+              <%= f.submit '回答', class: 'btn btn-primary btn-ms' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% end %>
+
+

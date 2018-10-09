@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show]
   
   def show
-    @user = User.find(params[:id]) 
-    # 自分のユーザーのみしか表示しないのであとで修正する。
+    @schedules = current_user.schedules.order('created_at DESC').page(params[:page])
   end
 
   def new
@@ -22,8 +21,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if current_user.update(user_params)
+      flash[:success] = 'スケジュールは正常に更新されました'
+      redirect_to current_user
+    else
+      flash.now[:danger] = 'スケジュールは更新されませんでした'
+      render :edit
+    end
+  end
+
   def edit
-    @user = User.edit
   end
   
   private

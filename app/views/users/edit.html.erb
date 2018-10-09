@@ -1,2 +1,39 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="text-center">
+  <h1>ユーザ情報の編集</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <%= form_for(current_user) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+
+      <div class="form-group">
+        <%= f.label :name, 'ユーザー名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, 'メールアドレス' %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, 'パスワード' %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, 'パスワード(確認)' %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :part, '担当楽器' %>
+        <%= f.select(:part, [['ヴァイオリン', 'ヴァイオリン'], ['ヴィオラ', 'ヴィオラ'], ['チェロ', 'チェロ'], ['コントラバス', 'コントラバス'], ['フルート', 'フルート'],['オーボエ', 'オーボエ'], ['クラリネット', 'クラリネット'], ['ファゴット', 'ファゴット'], ['ホルン', 'ホルン'], ['トランペット', 'トランペット'], ['トロンボーン', 'トロンボーン'], ['チューバ', 'チューバ'], ['その他', 'その他']]) %>
+      </div>
+
+      <%= f.submit '編集完了', class: 'btn btn-primary btn-ms' %>
+    <% end %>
+  </div>
+</div>

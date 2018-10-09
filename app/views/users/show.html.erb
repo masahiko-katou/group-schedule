@@ -1,2 +1,20 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="row">
+  
+
+  <h3 class="panel-title">
+    <%= current_user.name %>
+  </h3>
+  <p>パート：<%= current_user.part %></p>
+  <%= link_to 'ユーザー情報の編集', edit_user_path(current_user) %>
+</div>
+
+<div class="col-xs-8">
+    <ul class="media-list">
+      <% @schedules.each do |schedule| %>
+        <li><% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %>
+            |<% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %>
+            |<%= link_to  schedule.event, schedule %>
+            |<%= schedule.location %></li>
+      <% end %>
+    </ul>
+  </div>

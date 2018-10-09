@@ -1,0 +1,17 @@
+<h1><%= @schedule.event %></h1>
+<h2>場所：<%= @schedule.location%></h2>
+
+<h3><% date=@schedule.event_date %><%= date.strftime('%m月%d日 (%a)') %><% stime = @schedule.start_at %><br><%= stime.strftime('%H:%M') %>〜<% etime = @schedule.end_at %><%= etime.strftime('%H:%M') %></h3>
+<p><%= @schedule.detail %></p>
+<%= link_to '一覧に戻る', schedules_path %>
+
+<div>
+  <% if current_user == @schedule.user %>
+  <%= link_to '編集する', edit_schedule_path(@schedule) %>
+  <%= link_to '削除する', @schedule, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+  <% end %>
+</div>
+
+<% @answers.each do |answer| %>
+  <p><%= answer.status %></p>
+<% end %>
