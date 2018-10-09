@@ -7,7 +7,8 @@
   <p>パート：<%= current_user.part %></p>
   <%= link_to 'ユーザー情報の編集', edit_user_path(current_user) %>
 </div>
-
+<br>
+<p>あなたが作成した日程</p>
 <div class="col-xs-8">
     <ul class="media-list">
       <% @schedules.each do |schedule| %>

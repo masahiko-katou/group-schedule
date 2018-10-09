@@ -20,21 +20,23 @@
               <%= form_for(current_user.answers.build) do |f| %>
                 <%= hidden_field_tag :reaction_id, schedule.id %>
                 <div class="form-group">
-                  <%= f.label :status, 'ステータス' %>
-                  <%= f.text_field :status, class: 'form-control' %>
+                  <label><%= f.radio_button :status, '出席' %>出席</label>
+                  <label><%= f.radio_button :status, '遅刻' %>遅刻</label>
+                  <label><%= f.radio_button :status, '欠席' %>欠席</label>
+                  <label><%= f.radio_button :status, '保留' %>保留</label>
                 </div>
                 <div class="form-group">
                   <%= f.label :comment, 'コメント' %>
                   <%= f.text_field :comment, class: 'form-control' %>
                 </div>
               <%= f.submit '回答', class: 'btn btn-primary btn-ms' %>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <% end %>
 <% end %>
 
 

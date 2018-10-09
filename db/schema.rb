@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20181007104209) do
     t.integer  "reaction_id"
     t.string   "status"
     t.string   "comment"
+    t.string   "instrument"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["reaction_id"], name: "index_answers_on_reaction_id", using: :btree

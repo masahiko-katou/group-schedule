@@ -5,6 +5,7 @@ class CreateAnswers < ActiveRecord::Migration[5.0]
       t.references :reaction, foreign_key: { to_table: :schedules}
       t.string :status
       t.string :comment
+      t.string :instrument
 
       t.timestamps
       

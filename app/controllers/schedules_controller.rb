@@ -1,10 +1,9 @@
 class SchedulesController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:destroy, :edit, :update]
   
   def index
     @schedules = Schedule.all.order(:event_date)
-    
   end
   
   def show

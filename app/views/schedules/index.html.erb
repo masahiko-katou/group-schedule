@@ -23,10 +23,15 @@
             <% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %>
           </td>
           
+          <% if current_user.reaction?(schedule) %>
           <td>
             <%= link_to  schedule.event, schedule %>
           </td>
-          
+          <% else %>
+          <td>
+            <%= schedule.event %>
+          </td>
+          <% end %>
           <td>
             <%= schedule.location %>
           </td>

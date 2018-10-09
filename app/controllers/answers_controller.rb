@@ -3,9 +3,9 @@ class AnswersController < ApplicationController
   
   def create
     schedule = Schedule.find(params[:reaction_id])
-    current_user.answers.find_or_create_by(reaction_id: schedule.id)
-    Answer.last.update(answer_params)
-    flash[:success] = '回答を送信しました。'
+    current_user.answers.find_or_create_by(reaction_id: schedule.id).update(answer_params)
+    s = current_user.part
+    current_user.answers.find_by(reaction_id: schedule.id).update(instrument: s)
     redirect_to root_path
   end
 
@@ -17,6 +17,6 @@ class AnswersController < ApplicationController
   end
   
   def answer_params
-    params.require(:answer).permit(:status, :comment, :user_id, :reaction_id)
+    params.require(:answer).permit(:instrument, :status, :comment, :user_id, :reaction_id)
   end
 end

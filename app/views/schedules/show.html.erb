@@ -11,6 +11,8 @@
   <%= link_to '削除する', @schedule, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
   <% end %>
 
+
+
   <div class="col-xs-12">
     <table class="table table-striped">
       <thread>
@@ -27,7 +29,7 @@
         <tr>
           <td>
             <% a = answer.user_id %>
-            <%= @users.find(a).part %>
+            <%= answer.instrument %>
           </td>
           
           <td>
