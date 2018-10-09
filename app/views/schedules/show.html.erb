@@ -10,8 +10,40 @@
   <%= link_to '編集する', edit_schedule_path(@schedule) %>
   <%= link_to '削除する', @schedule, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
   <% end %>
-</div>
 
-<% @answers.each do |answer| %>
-  <p><%= answer.status %></p>
-<% end %>
+  <div class="col-xs-12">
+    <table class="table table-striped">
+      <thread>
+        <tr>
+          <th>パート</th>
+          <th>名前</th>
+          <th>回答</th>
+          <th>コメント</th>
+        </tr>
+      </thread>
+      <tbody>
+        <% @answers.each do |answer| %>
+        
+        <tr>
+          <td>
+            <% a = answer.user_id %>
+            <%= @users.find(a).part %>
+          </td>
+          
+          <td>
+            <%= @users.find(a).name %>
+          </td>
+          
+          <td>
+            <%= answer.status %>
+          </td>
+          
+          <td>
+            <%= answer.comment %>
+          </td>
+        </tr>
+
+        <% end %>
+      </tbody>
+    </table>
+  </div>

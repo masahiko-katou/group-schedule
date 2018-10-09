@@ -1,16 +1,47 @@
 <% if logged_in? %>
   <p>ようこそ、<%= current_user.name %>さん</p>
-  <div class="col-xs-8">
-    <ul class="media-list">
-      <% @schedules.each do |schedule| %>
-        <li><% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %>
-            |<% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %>
-            |<%= link_to  schedule.event, schedule %>
-            |<%= schedule.location %>|
+  <div class="col-xs-12">
+    <table class="table table-striped">
+      <thread>
+        <tr>
+          <th>日付</th>
+          <th>時間</th>
+          <th>内容</th>
+          <th>場所</th>
+          <th>回答</th>
+        </tr>
+      </thread>
+      <tbody>
+        <% @schedules.each do |schedule| %>
+        
+        <tr>
+          <td>
+            <% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %>
+          </td>
+          
+          <td>
+            <% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %>
+          </td>
+          
+          <td>
+            <%= link_to  schedule.event, schedule %>
+          </td>
+          
+          <td>
+            <%= schedule.location %>
+          </td>
+          
+          <td>
             <%= render 'schedules/modal', schedule: schedule %>
-        </li>
-      <% end %>
-    </ul>
+          </td>
+        </tr>
+
+        <% end %>
+      </tbody>
+    </table>
+    <div>
+
+    </div>
   </div>
 <% else %>
 <div class="center jumbotron">

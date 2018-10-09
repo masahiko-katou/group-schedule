@@ -4,10 +4,13 @@ class SchedulesController < ApplicationController
   
   def index
     @schedules = Schedule.all.order(:event_date)
+    
   end
   
   def show
     @schedule = Schedule.find(params[:id])
+    @answers = Answer.where(reaction_id: params[:id])
+    @users = User.all
   end
 
   def new
