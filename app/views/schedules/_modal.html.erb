@@ -20,10 +20,10 @@
               <%= form_for(current_user.answers.build) do |f| %>
                 <%= hidden_field_tag :reaction_id, schedule.id %>
                 <div class="form-group">
-                  <label><%= f.radio_button :status, '出席' %>出席</label>
-                  <label><%= f.radio_button :status, '遅刻' %>遅刻</label>
-                  <label><%= f.radio_button :status, '欠席' %>欠席</label>
-                  <label><%= f.radio_button :status, '保留' %>保留</label>
+                  <label><%= f.radio_button :status, '出席' %>出席</label><br>
+                  <label><%= f.radio_button :status, '遅刻' %>遅刻</label><br>
+                  <label><%= f.radio_button :status, '欠席' %>欠席</label><br>
+                  <label><%= f.radio_button :status, '保留' %>保留</label><br>
                 </div>
                 <div class="form-group">
                   <%= f.label :comment, 'コメント' %>

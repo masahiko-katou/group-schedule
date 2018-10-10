@@ -1,15 +1,15 @@
 class SchedulesController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy, :edit, :update]
+  before_action :correct_user, only: [:destroy]
   
   def index
-    @schedules = Schedule.all.order(:event_date)
+    @schedules = Schedule.all.order(:event_date).page(params[:page])
   end
   
   def show
     @schedule = Schedule.find(params[:id])
-    @answers = Answer.where(reaction_id: params[:id])
     @users = User.all
+    @answers = Answer.where(reaction_id: params[:id]).order("instrument DESC").page(params[:page])
   end
 
   def new

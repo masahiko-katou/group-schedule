@@ -40,9 +40,9 @@
             <%= render 'schedules/modal', schedule: schedule %>
           </td>
         </tr>
-
         <% end %>
       </tbody>
+       <%= paginate @schedules %>
     </table>
     <div>
 
