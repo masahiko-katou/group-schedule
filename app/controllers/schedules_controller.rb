@@ -9,7 +9,7 @@ class SchedulesController < ApplicationController
   def show
     @schedule = Schedule.find(params[:id])
     @users = User.all
-    @answers = Answer.where(reaction_id: params[:id]).order("instrument DESC").page(params[:page])
+    @answers = Answer.where(schedule_id: params[:id]).order("instrument DESC").page(params[:page])
   end
 
   def new
@@ -44,7 +44,6 @@ class SchedulesController < ApplicationController
   end
   
   def destroy
-    @schedule = Schedule.find(params[:id])
     @schedule.destroy
     flash[:success] = 'スケジュールを削除しました。'
     redirect_to root_url
@@ -57,7 +56,7 @@ class SchedulesController < ApplicationController
   end
   
   def correct_user
-    @schedule = current_user.schedule.find_by(id: params[:id])
+    @schedule = current_user.schedules.find_by(id: params[:id])
     unless @schedule
       redirect_to root_url
     end

@@ -1,5 +1,5 @@
 <% if current_user.reaction?(schedule) %>
-  <%= form_for(current_user.answers.find_by(reaction_id: schedule.id), html: {method: :delete}) do |f| %>
+  <%= form_for(current_user.answers.find_by(schedule_id: schedule.id), html: {method: :delete}) do |f| %>
     <%= hidden_field_tag :reaction_id, schedule.id %>
       <%= f.submit 'リセット', class: 'btn btn-danger btn-xs' %>
   <% end %>
@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col-md-6 col-md-offset-3">
               <%= form_for(current_user.answers.build) do |f| %>
-                <%= hidden_field_tag :reaction_id, schedule.id %>
+                <%= hidden_field_tag :schedule_id, schedule.id %>
                 <div class="form-group">
                   <label><%= f.radio_button :status, '出席' %>出席</label><br>
                   <label><%= f.radio_button :status, '遅刻' %>遅刻</label><br>

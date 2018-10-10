@@ -3,6 +3,7 @@
 
 <p><% date=@schedule.event_date %><%= date.strftime('%m月%d日 (%a)') %><% stime = @schedule.start_at %>   <%= stime.strftime('%H:%M') %>〜<% etime = @schedule.end_at %><%= etime.strftime('%H:%M') %></p>
 <p><%= @schedule.detail %></p>
+<p>作成者：<%= @schedule.user.name %></p>
 <%= link_to '一覧に戻る', schedules_path %>
 
 <div>

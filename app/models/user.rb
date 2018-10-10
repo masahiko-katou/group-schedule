@@ -7,19 +7,19 @@ class User < ApplicationRecord
   has_secure_password
   
   has_many :schedules
-  has_many :answers
-  has_many :reactions, through: :answers, source: :reaction
+  has_many :answers, dependent: :nullify
+  has_many :schedules, through: :answers, source: :schedule
   
   def reaction(schedule)
-    self.answers.find_or_create_by(reaction_id: schedule.id)
+    self.answers.find_or_create_by(schedule_id: schedule.id)
   end
   
   def deaction(schedule)
-    answer = self.answers.find_by(reaction_id: schedule.id)
+    answer = self.answers.find_by(schedule_id: schedule.id)
     answer.destroy if answer
   end
   
   def reaction?(aschedule)
-    self.reactions.include?(aschedule)
+    self.schedules.include?(aschedule)
   end
 end

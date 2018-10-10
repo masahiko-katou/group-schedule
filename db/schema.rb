@@ -14,14 +14,14 @@ ActiveRecord::Schema.define(version: 20181007104209) do
 
   create_table "answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
-    t.integer  "reaction_id"
+    t.integer  "schedule_id"
     t.string   "status"
     t.string   "comment"
     t.string   "instrument"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["reaction_id"], name: "index_answers_on_reaction_id", using: :btree
-    t.index ["user_id", "reaction_id"], name: "index_answers_on_user_id_and_reaction_id", unique: true, using: :btree
+    t.index ["schedule_id"], name: "index_answers_on_schedule_id", using: :btree
+    t.index ["user_id", "schedule_id"], name: "index_answers_on_user_id_and_schedule_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_answers_on_user_id", using: :btree
   end
 
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20181007104209) do
     t.datetime "updated_at",      null: false
   end
 
-  add_foreign_key "answers", "schedules", column: "reaction_id"
+  add_foreign_key "answers", "schedules"
   add_foreign_key "answers", "users"
   add_foreign_key "schedules", "users"
 end
