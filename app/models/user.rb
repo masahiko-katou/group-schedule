@@ -8,7 +8,7 @@ class User < ApplicationRecord
   
   has_many :schedules
   has_many :answers, dependent: :nullify
-  has_many :schedules, through: :answers, source: :schedule
+  has_many :schedules, through: :answers
   
   def reaction(schedule)
     self.answers.find_or_create_by(schedule_id: schedule.id)

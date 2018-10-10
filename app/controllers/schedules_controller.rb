@@ -9,20 +9,21 @@ class SchedulesController < ApplicationController
   def show
     @schedule = Schedule.find(params[:id])
     @users = User.all
-    @answers = Answer.where(schedule_id: params[:id]).order("instrument DESC").page(params[:page])
+    @answers = Answer.where(schedule_id: params[:id]).order("part DESC").page(params[:page])
   end
 
   def new
-    @schedule = Schedule.new 
+    @schedule = current_user.schedules.build(user_id: current_user.id)
   end
   
   def create
     @schedule = current_user.schedules.build(schedule_params)
+    @schedule.update(user_id: current_user.id)
     if @schedule.save
       flash[:success] = 'メッセージを投稿しました。'
       redirect_to @schedule
     else
-      @schedules = current_user.microposts.order('created_at DESC').page(params[:page])
+      @schedules = current_user.schedules.order('created_at DESC').page(params[:page])
       flash.now[:danger] = 'メッセージの投稿に失敗しました。'
       render :new
     end
@@ -52,7 +53,7 @@ class SchedulesController < ApplicationController
   private
   
   def schedule_params
-    params.require(:schedule).permit(:event, :event_date, :start_at, :end_at, :location, :detail)
+    params.require(:schedule).permit(:user_id, :event, :event_date, :start_at, :end_at, :location, :detail)
   end
   
   def correct_user
