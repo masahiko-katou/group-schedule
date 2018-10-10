@@ -23,7 +23,7 @@
         </tr>
       </thread>
       <tbody>
-        <% answers.each do |answer| %>
+        <% @answers.each do |answer| %>
         
         <tr>
           <td>
@@ -46,6 +46,6 @@
 
         <% end %>
       </tbody>
-       <%= paginate answers %>
+       <%= paginate @answers %>
     </table>
   </div>
