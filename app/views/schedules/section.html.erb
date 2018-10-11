@@ -1,6 +1,6 @@
 <div>
-  <h1><%= @schedule.event %></h1>
-  <h2>場所：<%= @schedule.location%></h2>
+  <h3><%= @schedule.event %></h3>
+  <h4>場所：<%= @schedule.location%></h4>
   <p><% date=@schedule.event_date %><%= date.strftime('%m月%d日 (%a)') %><% stime = @schedule.start_at %>   <%= stime.strftime('%H:%M') %>〜<% etime = @schedule.end_at %><%= etime.strftime('%H:%M') %></p>
   <p><%= @schedule.detail %></p>
   <p>作成者：<%= @schedule.user.name %></p>
@@ -14,7 +14,7 @@
 </div>
 <br>
   
-  <div class="col-xs-8">
+  <div class="col-xs-12">
     <ul class="nav nav-tabs nav-justified">
       <li class="<%= 'active' if current_page?(schedule_path(@schedule)) %>">
         <%= link_to schedule_path(@schedule) do %>パート<% end %></li>

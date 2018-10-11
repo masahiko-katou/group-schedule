@@ -1,11 +1,11 @@
 <% if logged_in? %>
   <p>ようこそ、<%= current_user.name %>さん</p>
+<div class="row">
   <div class="col-xs-12">
     <table class="table table-striped">
       <thread>
         <tr>
-          <th>日付</th>
-          <th>時間</th>
+          <th>日時</th>
           <th>内容</th>
           <th>場所</th>
           <th>回答</th>
@@ -17,13 +17,9 @@
         
         <tr>
           <td>
-            <% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %>
+            <% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %>
           </td>
-          
-          <td>
-            <% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %>
-          </td>
-          
+
           <% if current_user.reaction?(schedule) %>
             <td>
               <%= link_to  schedule.event, schedule %>
@@ -52,10 +48,8 @@
       </tbody>
        <%= paginate @schedules %>
     </table>
-    <div>
-
-    </div>
   </div>
+</div>
 <% else %>
 <div class="center jumbotron">
   <div class="text-center">

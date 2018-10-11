@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+table {
+  font-size: 11px;
+}
+
+@media (min-width: 500px) {
+  table {
+    font-size: 14px;
+  }
+}
