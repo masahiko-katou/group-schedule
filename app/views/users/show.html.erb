@@ -5,7 +5,7 @@
     <%= current_user.name %>
   </h3>
   <p>パート：<%= current_user.part %></p>
-  <%= link_to 'ユーザー情報の編集', edit_user_path(current_user) %>
+  <%= link_to 'ユーザー情報の編集', edit_user_path(current_user), class: "btn btn-success" %>
 </div>
 <br>
 

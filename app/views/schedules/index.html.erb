@@ -9,6 +9,7 @@
           <th>内容</th>
           <th>場所</th>
           <th>回答</th>
+          <th></th>
         </tr>
       </thread>
       <tbody>
@@ -24,18 +25,25 @@
           </td>
           
           <% if current_user.reaction?(schedule) %>
-          <td>
-            <%= link_to  schedule.event, schedule %>
-          </td>
+            <td>
+              <%= link_to  schedule.event, schedule %>
+            </td>
           <% else %>
-          <td>
-            <%= schedule.event %>
-          </td>
+            <td>
+              <%= schedule.event %>
+            </td>
           <% end %>
           <td>
             <%= schedule.location %>
           </td>
-          
+          <td>
+            <% if current_user.reaction?(schedule) %>
+              <%= @answers.find_by(schedule_id: schedule.id).status %>
+            <% else %>
+              未回答
+            <% end %>
+            <% %>
+          </td>
           <td>
             <%= render 'schedules/modal', schedule: schedule %>
           </td>

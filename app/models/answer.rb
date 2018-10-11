@@ -4,4 +4,5 @@ class Answer < ApplicationRecord
   
   validates :user_id, presence: true
   validates :schedule_id, presence: true
+  validates :status, presence: true
 end

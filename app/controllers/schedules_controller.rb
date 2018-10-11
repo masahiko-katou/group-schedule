@@ -4,27 +4,28 @@ class SchedulesController < ApplicationController
   
   def index
     @schedules = Schedule.all.order(:event_date).page(params[:page])
+    @answers = Answer.all
   end
   
   def show
     @schedule = Schedule.find(params[:id])
     @users = User.all
-    @answers = Answer.where(schedule_id: params[:id]).order("part DESC").page(params[:page])
+    @answers = Answer.where(schedule_id: params[:id]).page(params[:page])
   end
 
   def new
-    @schedule = current_user.schedules.build(user_id: current_user.id)
+    @schedule = current_user.schedules.build
   end
   
   def create
     @schedule = current_user.schedules.build(schedule_params)
     @schedule.update(user_id: current_user.id)
     if @schedule.save
-      flash[:success] = 'メッセージを投稿しました。'
+      flash[:success] = '予定を作成しました！'
       redirect_to @schedule
     else
       @schedules = current_user.schedules.order('created_at DESC').page(params[:page])
-      flash.now[:danger] = 'メッセージの投稿に失敗しました。'
+      flash.now[:danger] = '予定を作成できませんでした...'
       render :new
     end
   end
@@ -36,17 +37,17 @@ class SchedulesController < ApplicationController
   def update
     @schedule = Schedule.find(params[:id])
     if @schedule.update(schedule_params)
-      flash[:success] = 'スケジュールは正常に更新されました'
+      flash[:success] = '予定は正常に更新されました！'
       redirect_to @schedule
     else
-      flash.now[:danger] = 'スケジュールは更新されませんでした'
+      flash.now[:danger] = '予定は更新されませんでした...'
       render :edit
     end
   end
   
   def destroy
     @schedule.destroy
-    flash[:success] = 'スケジュールを削除しました。'
+    flash[:success] = '予定を削除しました。'
     redirect_to root_url
   end
   

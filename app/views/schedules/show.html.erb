@@ -4,15 +4,15 @@
 <p><% date=@schedule.event_date %><%= date.strftime('%m月%d日 (%a)') %><% stime = @schedule.start_at %>   <%= stime.strftime('%H:%M') %>〜<% etime = @schedule.end_at %><%= etime.strftime('%H:%M') %></p>
 <p><%= @schedule.detail %></p>
 <p>作成者：<%= @schedule.user.name %></p>
-<%= link_to '一覧に戻る', schedules_path %>
 
 <div>
+  <%= link_to '一覧に戻る', schedules_path, class: 'btn btn-primary' %>
   <% if current_user == @schedule.user %>
-  <%= link_to '編集する', edit_schedule_path(@schedule) %>
-  <%= link_to '削除する', @schedule, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+  <%= link_to '編集する', edit_schedule_path(@schedule), class: 'btn btn-success' %>
+  <%= link_to '削除する', @schedule, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
   <% end %>
 </div>
-
+<br>
   <div class="col-xs-12">
     <table class="table table-striped">
       <thread>
@@ -29,7 +29,7 @@
         <tr>
           <td>
             <% a = answer.user_id %>
-            <%= answer.part %>
+            <%= @users.find(a).part %>
           </td>
           
           <td>

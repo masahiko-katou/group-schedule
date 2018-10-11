@@ -3,10 +3,15 @@ class AnswersController < ApplicationController
   
   def create
     schedule = Schedule.find(params[:schedule_id])
-    current_user.answers.find_or_create_by(schedule_id: schedule.id).update(answer_params)
-    s = current_user.part
-    current_user.answers.find_by(schedule_id: schedule.id).update(part: s)
-    redirect_to root_path
+    @answer = current_user.answers.find_or_create_by(schedule_id: schedule.id)
+    @answer.update(answer_params)
+    if @answer.save
+      flash[:success] = '回答を送信しました。'
+      redirect_to root_path
+    else
+      flash[:danger] = '回答の送信に失敗しました。もう一度送り直してください。'
+      redirect_to root_path
+    end
   end
 
   def destroy
@@ -17,6 +22,6 @@ class AnswersController < ApplicationController
   end
   
   def answer_params
-    params.require(:answer).permit(:instrument, :status, :comment, :user_id, :schedule_id)
+    params.require(:answer).permit(:status, :comment, :user_id, :schedule_id)
   end
 end

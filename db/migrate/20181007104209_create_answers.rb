@@ -5,7 +5,6 @@ class CreateAnswers < ActiveRecord::Migration[5.0]
       t.references :schedule, foreign_key: true
       t.string :status
       t.string :comment
-      t.string :part
 
       t.timestamps
       

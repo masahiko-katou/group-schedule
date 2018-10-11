@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 20181007104209) do
     t.integer  "schedule_id"
     t.string   "status"
     t.string   "comment"
-    t.string   "part"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["schedule_id"], name: "index_answers_on_schedule_id", using: :btree
