@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :new, :create, :edit, :update]
   resources :schedules do
     member do
-      get :reactions
+      get :section
+      get :whole
     end
   end
   resources :answers, only: [:new, :create, :destroy]

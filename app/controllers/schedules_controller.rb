@@ -9,8 +9,7 @@ class SchedulesController < ApplicationController
   
   def show
     @schedule = Schedule.find(params[:id])
-    @users = User.all
-    @answers = Answer.where(schedule_id: params[:id]).page(params[:page])
+    @users = User.where(part: current_user.part).order(:part).page(params[:page])
   end
 
   def new
@@ -47,10 +46,22 @@ class SchedulesController < ApplicationController
   
   def destroy
     @schedule.destroy
-    flash[:success] = '予定を削除しました。'
+    flash[:success] = 'お望み通り予定を削除してしまいました！'
     redirect_to root_url
   end
   
+  def section
+    p = current_user.part
+    if p == 'フルート' || p == 'オーボエ' || p == 'ファゴット' || p == 'クラリネット' || p == 'トランペット' || p == 'トロンボーン' || p == 'ホルン' || p == 'チューバ'
+      @users = User.where(part: 'フルート').or(where(part: 'クラリネット')).or(where(part: 'ファゴット')).or(where(part: 'オーボエ')).or(where(part: 'トランペット')).or(where(part: 'トロンボーン')).or(where(part: 'チューバ')).or(where(part: 'ホルン')).order(:part)
+    else
+      @users = User.where(part: 'ヴァイオリン').or(where(part: 'ヴィオラ')).or(where(part: 'チェロ')).or(where(part: 'コントラバス')).order(:part)
+    end
+  end
+  
+  def whole
+    @users = User.all.order(:part)
+  end
   private
   
   def schedule_params

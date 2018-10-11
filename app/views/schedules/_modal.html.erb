@@ -21,16 +21,16 @@
                 <%= hidden_field_tag :schedule_id, schedule.id %>
                 <div class="btn-group" data-toggle="buttons">
                   <label class="btn btn-success">
-                    <%= f.radio_button :status, '出席' %>出席
+                    <%= f.radio_button :status, '◯' %>出席
                   </label>
                   <label class="btn btn-warning">
-                    <%= f.radio_button :status, '遅刻' %>遅刻
+                    <%= f.radio_button :status, '△' %>遅刻
                   </label>
                   <label class="btn btn-danger">
-                    <%= f.radio_button :status, '欠席' %>欠席
+                    <%= f.radio_button :status, '×' %>欠席
                   </label>
                   <label class="btn btn-default">
-                    <%= f.radio_button :status, '保留' %>保留
+                    <%= f.radio_button :status, '？' %>保留
                   </label>
                 </div>
                 <p></p>

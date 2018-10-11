@@ -40,7 +40,7 @@
             <% if current_user.reaction?(schedule) %>
               <%= @answers.find_by(schedule_id: schedule.id).status %>
             <% else %>
-              未回答
+               ー
             <% end %>
             <% %>
           </td>
