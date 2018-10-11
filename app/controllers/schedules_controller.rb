@@ -1,15 +1,16 @@
 class SchedulesController < ApplicationController
   before_action :require_user_logged_in
   before_action :correct_user, only: [:destroy]
+  require 'date'
   
   def index
-    @schedules = Schedule.all.order(:event_date).page(params[:page])
+    @schedules = Schedule.where("event_date >= ?", Date.current).order(:event_date).page(params[:page])
     @answers = Answer.all
   end
   
   def show
     @schedule = Schedule.find(params[:id])
-    @users = User.where(part: current_user.part).order(:part).page(params[:page])
+    @users = User.where(part: current_user.part).page(params[:page])
   end
 
   def new
@@ -52,15 +53,17 @@ class SchedulesController < ApplicationController
   
   def section
     p = current_user.part
+    @schedule = Schedule.find(params[:id])
     if p == 'フルート' || p == 'オーボエ' || p == 'ファゴット' || p == 'クラリネット' || p == 'トランペット' || p == 'トロンボーン' || p == 'ホルン' || p == 'チューバ'
-      @users = User.where(part: 'フルート').or(where(part: 'クラリネット')).or(where(part: 'ファゴット')).or(where(part: 'オーボエ')).or(where(part: 'トランペット')).or(where(part: 'トロンボーン')).or(where(part: 'チューバ')).or(where(part: 'ホルン')).order(:part)
+      @sections = User.where("part=? or part=? or part=? or part=? or part=? or part=? or part=? or part=?", 'フルート', 'クラリネット', 'ファゴット', 'オーボエ', 'トランペット', 'トロンボーン', 'チューバ', 'ホルン').order(:part).page(params[:page])
     else
-      @users = User.where(part: 'ヴァイオリン').or(where(part: 'ヴィオラ')).or(where(part: 'チェロ')).or(where(part: 'コントラバス')).order(:part)
+      @sections = User.where(["part=? or part=? or part=? or part=?", 'ヴァイオリン',  'ヴィオラ', 'チェロ', 'コントラバス']).order(:part).page(params[:page])
     end
   end
   
   def whole
-    @users = User.all.order(:part)
+    @schedule = Schedule.find(params[:id])
+    @users = User.all.order(:part).page(params[:page])
   end
   private
   

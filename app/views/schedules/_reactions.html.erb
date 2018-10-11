@@ -1,0 +1,33 @@
+<div class="col-xs-12">
+  <table class="table table-striped">
+    <thread>
+      <tr>
+        <th>パート</th>
+        <th>名前</th>
+        <th>回答</th>
+        <th>コメント</th>
+      </tr>
+    </thread>
+    <tbody>
+      <% users.each do |user| %>
+        <% if user.reaction?(schedule) %>
+          <% his_answer = user.answers.find_by(schedule_id: schedule.id) %>
+          <tr>
+            <td><%= user.part %></td>
+            <td><%= user.name %></td>
+            <td><%= his_answer.status %></td>
+            <td><%= his_answer.comment %></td>
+          </tr>
+        <% else %>
+          <tr>
+            <td><%= user.part %></td>
+            <td><%= user.name %></td>
+            <td>未回答</td>
+            <td></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+     <%= paginate users %>
+  </table>
+</div>
