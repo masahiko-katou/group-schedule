@@ -34,7 +34,7 @@
           </td>
           <td>
             <% if current_user.reaction?(schedule) %>
-              <%= @answers.find_by(schedule_id: schedule.id).status %>
+              <%= @answers.find_by(schedule_id: schedule.id, user_id: current_user.id).status %>
             <% else %>
                ー
             <% end %>
