@@ -7,15 +7,3 @@
   <p>パート：<%= current_user.part %></p>
   <%= link_to 'ユーザー情報の編集', edit_user_path(current_user), class: "btn btn-success" %>
 </div>
-<br>
-
-<div class="col-xs-8">
-    <ul class="media-list">
-      <% @schedules.each do |schedule| %>
-        <li><% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %>
-            |<% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %>
-            |<%= link_to  schedule.event, schedule %>
-            |<%= schedule.location %></li>
-      <% end %>
-    </ul>
-  </div>
