@@ -22,3 +22,17 @@ table {
     font-size: 14px;
   }
 }
+
+.time {
+  width: 100px;
+  float: left;
+}
+
+.location {
+  clear: both;
+}
+
+.mtime {
+  float: left;
+  width: 15px;
+}

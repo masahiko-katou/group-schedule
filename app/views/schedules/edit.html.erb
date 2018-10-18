@@ -1,5 +1,5 @@
 <div class="text-center">
-  <h1>編集</h1>
+  <h1>日程の編集</h1>
 </div>
 
 <div class="row">
@@ -7,7 +7,8 @@
 
     <%= form_for(@schedule) do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
-
+      <% hidden_field_tag :user_id, current_user.id %>
+      
       <div class="form-group">
         <%= f.label :event, 'イベント名' %>
         <%= f.text_field :event, class: 'form-control' %>
@@ -15,30 +16,32 @@
 
       <div class="form-group">
         <%= f.label :event_date, '日付' %>
-        <%= f.date_select :event_date, {}, class: 'form-control' %>
+        <%= f.date_field :event_date, {} %>
       </div>
 
-      <div class="form-group">
-        <%= f.label :start_at, '開始時刻' %>
-        <%= f.time_select :start_at, {}, class: 'form-control' %>
+      <div class="form-group time">
+        <%= f.label :start_at, '開始' %><br>
+        <%= f.time_select :start_at, {} %>
       </div>
       
-      <div class="form-group">
-        <%= f.label :end_at, '終了時刻' %>
-        <%= f.time_select :end_at, {}, class: 'form-control' %>
+      <div class="mtime"><br>〜</div>
+      
+      <div class="form-group time">
+        <%= f.label :end_at, '終了' %><br>
+        <%= f.time_select :end_at, {} %>
       </div>
 
-      <div class="form-group">
+      <div class="form-group location">
         <%= f.label :location, '場所' %>
         <%= f.text_field :location, class: 'form-control' %>
       </div>
       
       <div class="form-group">
         <%= f.label :detail, '詳細' %>
-        <%= f.text_field :detail, class: 'form-control' %>
+        <%= f.text_area :detail, class: 'form-control' %>
       </div>
 
-      <%= f.submit '完了', class: 'btn btn-primary btn-ms' %>
+      <%= f.submit '完了', class: 'btn btn-primary btn-ms center-block' %>
     <% end %>
   </div>
 </div>
