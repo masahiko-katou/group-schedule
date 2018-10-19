@@ -24,7 +24,6 @@ class SchedulesController < ApplicationController
       flash[:success] = '予定を作成しました！'
       redirect_to @schedule
     else
-      @schedules = current_user.schedules.order('created_at DESC').page(params[:page])
       flash.now[:danger] = '予定を作成できませんでした...'
       render :new
     end
@@ -47,17 +46,18 @@ class SchedulesController < ApplicationController
   
   def destroy
     @schedule.destroy
-    flash[:success] = 'お望み通り予定を削除してしまいました！'
+    flash[:success] = '予定を削除してしまいました！'
     redirect_to root_url
   end
   
   def section
-    p = current_user.part
+    @section = Instrument.find_by(name: current_user.part)
+    s = @section.section
     @schedule = Schedule.find(params[:id])
-    if p == 'フルート' || p == 'オーボエ' || p == 'ファゴット' || p == 'クラリネット' || p == 'トランペット' || p == 'トロンボーン' || p == 'ホルン' || p == 'チューバ'
-      @sections = User.where("part=? or part=? or part=? or part=? or part=? or part=? or part=? or part=?", 'フルート', 'クラリネット', 'ファゴット', 'オーボエ', 'トランペット', 'トロンボーン', 'チューバ', 'ホルン').order(:part).page(params[:page])
+    if s == 3 || s == 4
+      @users = User.where("part=? or part=? or part=? or part=? or part=? or part=? or part=? or part=?", 'フルート', 'クラリネット', 'ファゴット', 'オーボエ', 'トランペット', 'トロンボーン', 'チューバ', 'ホルン').order(:part).page(params[:page])
     else
-      @sections = User.where(["part=? or part=? or part=? or part=?", 'ヴァイオリン',  'ヴィオラ', 'チェロ', 'コントラバス']).order(:part).page(params[:page])
+      @users = User.where(["part=? or part=? or part=? or part=?", 'ヴァイオリン',  'ヴィオラ', 'チェロ', 'コントラバス']).order(:part).page(params[:page])
     end
   end
   
@@ -68,7 +68,7 @@ class SchedulesController < ApplicationController
   private
   
   def schedule_params
-    params.require(:schedule).permit(:user_id, :event, :event_date, :start_at, :end_at, :location, :detail)
+    params.require(:schedule).permit(:event, :event_date, :start_at, :end_at, :location, :detail)
   end
   
   def correct_user

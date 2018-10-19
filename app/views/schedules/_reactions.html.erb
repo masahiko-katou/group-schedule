@@ -10,22 +10,18 @@
     </thread>
     <tbody>
       <% users.each do |user| %>
-        <% if user.reaction?(schedule) %>
-          <% his_answer = user.answers.find_by(schedule_id: schedule.id) %>
-          <tr>
-            <td><%= user.part %></td>
-            <td><%= user.name %></td>
-            <td><%= his_answer.status %></td>
-            <td><%= his_answer.comment %></td>
-          </tr>
-        <% else %>
-          <tr>
-            <td><%= user.part %></td>
-            <td><%= user.name %></td>
-            <td>ー</td>
-            <td></td>
-          </tr>
-        <% end %>
+        <tr>
+          <td><%= user.part %></td>
+          <td><%= user.name %></td>
+            <% if user.reaction?(schedule) %>
+              <% his_answer = user.answers.find_by(schedule_id: schedule.id) %>
+              <td><%= his_answer.status %></td>
+              <td><%= his_answer.comment %></td>
+            <% else %>
+              <td>ー</td>
+              <td></td>
+            <% end %>
+        </tr>
       <% end %>
     </tbody>
      <%= paginate users %>

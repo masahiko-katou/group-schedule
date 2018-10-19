@@ -7,8 +7,6 @@
 
     <%= form_for(@schedule) do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
-      <% hidden_field_tag :user_id, current_user.id %>
-      
       <div class="form-group">
         <%= f.label :event, 'イベント名' %>
         <%= f.text_field :event, class: 'form-control' %>

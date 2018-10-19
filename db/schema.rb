@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181007104209) do
+ActiveRecord::Schema.define(version: 20181019061217) do
 
   create_table "answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20181007104209) do
     t.index ["schedule_id"], name: "index_answers_on_schedule_id", using: :btree
     t.index ["user_id", "schedule_id"], name: "index_answers_on_user_id_and_schedule_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_answers_on_user_id", using: :btree
+  end
+
+  create_table "instruments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "section"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "schedules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
