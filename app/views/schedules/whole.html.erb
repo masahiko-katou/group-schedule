@@ -18,12 +18,9 @@
   
 <div class="col-xs-12">
   <ul class="nav nav-tabs nav-justified">
-    <li class="<%= 'active' if current_page?(schedule_path(@schedule)) %>">
-      <%= link_to schedule_path(@schedule) do %>パート<% end %></li>
-    <li class="<%= 'active' if current_page?(section_schedule_path(@schedule)) %>">
-      <%= link_to section_schedule_path(@schedule) do %>セクション<% end %></li>
-    <li class="<%= 'active' if current_page?(whole_schedule_path(@schedule)) %>">
-      <%= link_to whole_schedule_path(@schedule) do %>全体<% end %></li>
+    <li class="<%= 'active' if current_page?(schedule_path(@schedule)) %>"><%= link_to schedule_path(@schedule) do %>パート<% end %></li>
+    <li class="<%= 'active' if current_page?(section_schedule_path(@schedule)) %>"><%= link_to section_schedule_path(@schedule) do %>セクション<% end %></li>
+    <li class="<%= 'active' if current_page?(whole_schedule_path(@schedule)) %>"><%= link_to whole_schedule_path(@schedule) do %>全体<% end %></li>
   </ul>
   <%= render 'reactions', users: @users, schedule: @schedule %>
 </div>

@@ -14,36 +14,21 @@
       </thread>
       <tbody>
         <% @schedules.each do |schedule| %>
-        
-        <tr>
-          <td>
-            <% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %>
-          </td>
-
-          <% if current_user.reaction?(schedule) %>
-            <td>
-              <%= link_to  schedule.event, schedule %>
-            </td>
-          <% else %>
-            <td>
-              <%= schedule.event %>
-            </td>
-          <% end %>
-          <td>
-            <%= schedule.location %>
-          </td>
-          <td>
+          <tr>
+            <td><% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %></td>
             <% if current_user.reaction?(schedule) %>
-              <%= @answers.find_by(schedule_id: schedule.id, user_id: current_user.id).status %>
+              <td><%= link_to  schedule.event, schedule %></td>
             <% else %>
-               ー
+              <td><%= schedule.event %></td>
             <% end %>
-            <% %>
-          </td>
-          <td>
-            <%= render 'schedules/modal', schedule: schedule %>
-          </td>
-        </tr>
+              <td><%= schedule.location %></td>
+            <% if current_user.reaction?(schedule) %>
+              <td><%= @answers.find_by(schedule_id: schedule.id, user_id: current_user.id).status %></td>
+            <% else %>
+              <td>ー</td>
+            <% end %>
+            <td><%= render 'schedules/modal', schedule: schedule %></td>
+          </tr>
         <% end %>
       </tbody>
        <%= paginate @schedules %>

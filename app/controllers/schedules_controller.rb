@@ -51,19 +51,18 @@ class SchedulesController < ApplicationController
   end
   
   def section
-    @section = Instrument.find_by(name: current_user.part)
-    s = @section.section
+    s = current_user.section
     @schedule = Schedule.find(params[:id])
     if s == 3 || s == 4
-      @users = User.where("part=? or part=? or part=? or part=? or part=? or part=? or part=? or part=?", 'フルート', 'クラリネット', 'ファゴット', 'オーボエ', 'トランペット', 'トロンボーン', 'チューバ', 'ホルン').order(:part).page(params[:page])
+      @users = User.where(["section=? or section=?", '3', '4']).order(:instrument).page(params[:page])
     else
-      @users = User.where(["part=? or part=? or part=? or part=?", 'ヴァイオリン',  'ヴィオラ', 'チェロ', 'コントラバス']).order(:part).page(params[:page])
+      @users = User.where(["section=? or section=?", '1',  '2']).order(:instrument).page(params[:page])
     end
   end
   
   def whole
     @schedule = Schedule.find(params[:id])
-    @users = User.all.order(:part).page(params[:page])
+    @users = User.all.order(:instrument).page(params[:page])
   end
   private
   
