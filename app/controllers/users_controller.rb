@@ -24,10 +24,10 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      flash[:success] = 'スケジュールは正常に更新されました'
+      flash[:success] = 'ユーザ情報は正常に更新されました'
       redirect_to current_user
     else
-      flash.now[:danger] = 'スケジュールは更新されませんでした'
+      flash.now[:danger] = 'ユーザ情報は更新されませんでした'
       render :edit
     end
     numbering(current_user)

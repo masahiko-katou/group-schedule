@@ -6,7 +6,7 @@ class AnswersController < ApplicationController
     @answer = current_user.answers.find_or_create_by(schedule_id: schedule.id)
     @answer.update(answer_params)
     if @answer.save
-      flash[:success] = '回答を送信できたようです！'
+      flash[:success] = '回答を送信しました。'
       redirect_to root_path
     else
       flash[:danger] = '回答を送れませんでした(´・ω・`)ｼｮﾎﾞｰﾝ'
@@ -17,7 +17,7 @@ class AnswersController < ApplicationController
   def destroy
     schedule = Schedule.find(params[:schedule_id])
     current_user.deaction(schedule)
-    flash[:success] = '回答をリセットしました！' 
+    flash[:success] = '回答をリセットしました。' 
     redirect_to root_path
   end
   

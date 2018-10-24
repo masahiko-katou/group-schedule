@@ -1,18 +1,17 @@
 <% if current_user.reaction?(schedule) %>
   <%= form_for(current_user.answers.find_by(schedule_id: schedule.id), html: {method: :delete}) do |f| %>
     <%= hidden_field_tag :schedule_id, schedule.id %>
-      <%= f.submit 'リセット', class: 'btn btn-default btn-xs' %>
+    <%= f.submit 'リセット', class: 'btn btn-default btn-xs' %>
   <% end %>
 <% else %>
-  <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-sample">回答する</button>
-  <div class="modal" id="modal-sample" tabindex="-1">
+  <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#schedule">回答する</button>
+  <div class="modal fade" id="schedule" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">&times;</span>
-          </button>
-                <h4 class="modal-title" id="modal-label"></h4>
+          <%= schedule.location %>
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="modal-label"><%= schedule.event %></h4>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -20,25 +19,17 @@
               <%= form_for(current_user.answers.build) do |f| %>
                 <%= hidden_field_tag :schedule_id, schedule.id %>
                 <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-success">
-                    <%= f.radio_button :status, '◯' %>出席
-                  </label>
-                  <label class="btn btn-warning">
-                    <%= f.radio_button :status, '△' %>遅刻
-                  </label>
-                  <label class="btn btn-danger">
-                    <%= f.radio_button :status, '×' %>欠席
-                  </label>
-                  <label class="btn btn-default">
-                    <%= f.radio_button :status, '？' %>保留
-                  </label>
+                  <label class="btn btn-success"><%= f.radio_button :status, '◯' %>出席</label>
+                  <label class="btn btn-warning"><%= f.radio_button :status, '△' %>遅刻</label>
+                  <label class="btn btn-danger"><%= f.radio_button :status, '×' %>欠席</label>
+                  <label class="btn btn-default"><%= f.radio_button :status, '？' %>保留</label>
                 </div>
                 <p></p>
                 <div class="form-group">
                   <%= f.label :comment, 'コメント' %>
                   <%= f.text_field :comment, class: 'form-control' %>
                 </div>
-              <%= f.submit '回答', class: 'btn btn-primary btn-ms center-block' %>
+                <%= f.submit '回答', class: 'btn btn-primary btn-ms center-block' %>
               <% end %>
             </div>
           </div>
@@ -47,5 +38,3 @@
     </div>
   </div>
 <% end %>
-
-
