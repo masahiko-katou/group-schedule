@@ -5,12 +5,23 @@ class AnswersController < ApplicationController
     schedule = Schedule.find(params[:schedule_id])
     @answer = current_user.answers.find_or_create_by(schedule_id: schedule.id)
     @answer.update(answer_params)
-    if @answer.save
-      flash[:success] = '回答を送信しました。'
-      redirect_to root_path
+    if @answer.status == '×' || @answer.status == '△'
+      if @answer.save(context: :absent)
+        flash[:success] = '回答を送信しました。'
+        redirect_to root_path
+      else
+        current_user.deaction(schedule)
+        flash[:danger] = '回答を送れませんでした（理由が書かれていないかも）'
+        redirect_to root_path
+      end
     else
-      flash[:danger] = '回答を送れませんでした(´・ω・`)ｼｮﾎﾞｰﾝ'
-      redirect_to root_path
+      if @answer.save
+        flash[:success] = '回答を送信しました。'
+        redirect_to root_path
+      else
+        flash[:danger] = '回答を送れませんでした(´・ω・`)ｼｮﾎﾞｰﾝ'
+        redirect_to root_path
+      end
     end
   end
 

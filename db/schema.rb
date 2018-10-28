@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181023065227) do
+ActiveRecord::Schema.define(version: 20181028034539) do
 
   create_table "answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20181023065227) do
     t.integer  "Instrument_id"
     t.integer  "instrument"
     t.integer  "section"
+    t.string   "remember_digest"
     t.index ["Instrument_id"], name: "index_users_on_Instrument_id", using: :btree
   end
 
