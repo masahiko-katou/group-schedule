@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show]
   
   def show
-    @schedules = Schedule.where(user_id: current_user.id).order('created_at DESC').page(params[:page])
+    @schedules = Schedule.where(user_id: current_user.id).order('created_at DESC')
     @schedule = Schedule.find_by(user_id: current_user.id)
     @user = current_user
     @answers = Answer.all
