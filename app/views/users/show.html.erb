@@ -5,47 +5,44 @@
     <%= @user.name %>
   </h3>
   <p>パート：<%= @user.part %></p>
-  
-  <% s = Schedule.where(user_id: @user.id).count %>
-  <% if s == 0 %>
-  <br><p>作成した予定はありません</p>
-  <% else %>
+  <br>
+  <h6>作成した予定</h6>
     <div class="row">
       <div class="col-xs-12">
         <table class="table table-striped">
-      <thread>
-        <tr>
-          <th>日時</th>
-          <th>内容</th>
-          <th>場所</th>
-          <th>回答</th>
-          <th> </th>
-        </tr>
-      </thread>
-      <tbody>
-        <% @schedules.each do |schedule| %>
-          <tr>
-            <td><% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %></td>
-            <% if current_user.reaction?(schedule) %>
-              <td><%= link_to  schedule.event, schedule %></td>
-            <% else %>
-              <td><%= schedule.event %></td>
-            <% end %>
-              <td><%= schedule.location %></td>
-            <% if current_user.reaction?(schedule) %>
-              <td><%= @answers.find_by(schedule_id: schedule.id, user_id: current_user.id).status %></td>
-            <% else %>
-              <td>ー</td>
-            <% end %>
-            <td><%= render 'schedules/modal', schedule: schedule %></td>
-          </tr>
-        <% end %>
-      </tbody>
+          <thread>
+            <tr>
+              <th>日時</th>
+              <th>内容</th>
+              <th>場所</th>
+              <th>回答</th>
+              <th> </th>
+            </tr>
+          </thread>
+          <tbody>
+            <% @schedules.each do |schedule| %>
+              <tr>
+                <td><% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %></td>
+                <% if current_user.reaction?(schedule) %>
+                  <td><%= link_to  schedule.event, schedule %></td>
+                <% else %>
+                  <td><%= schedule.event %></td>
+                <% end %>
+                  <td><%= schedule.location %></td>
+                <% if current_user.reaction?(schedule) %>
+                  <td><%= @answers.find_by(schedule_id: schedule.id, user_id: current_user.id).status %></td>
+                <% else %>
+                  <td>ー</td>
+                <% end %>
+                <td><%= render 'schedules/modal', schedule: schedule %></td>
+              </tr>
+          </tbody>
        <%= paginate @schedules %>
     </table>
       </div>
     </div>
-  <% end %>
+              <% end %>
   <%= link_to 'ユーザー情報の編集', edit_user_path(current_user), class: "btn btn-success" %>
-
+  <%= link_to '退会', @user, method: :delete, data: { confirm: '本当に退会してよろしいですか？' }, class: 'btn btn-danger' %>
+  <p>※退会する際は作成した予定が無い状態で退会してください</p>
 </div>
