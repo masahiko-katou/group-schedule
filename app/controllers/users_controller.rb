@@ -2,7 +2,10 @@ class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show]
   
   def show
-    @schedules = current_user.schedules.order('created_at DESC').page(params[:page])
+    @schedules = Schedule.where(user_id: current_user.id).order('created_at DESC').page(params[:page])
+    @schedule = Schedule.find_by(user_id: current_user.id)
+    @user = current_user
+    @answers = Answer.all
   end
 
   def new
@@ -34,6 +37,13 @@ class UsersController < ApplicationController
   end
 
   def edit
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+     @user.destroy
+      flash[:success] = '退会しました'
+      redirect_to root_url
   end
   
   private

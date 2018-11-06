@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   get 'todaiphil', to: 'users#new'
   
-  resources :users, only: [:show, :new, :create, :edit, :update]
+  resources :users, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :schedules do
     member do
       get :section

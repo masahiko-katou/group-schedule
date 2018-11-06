@@ -7,8 +7,8 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   
-  has_many :schedules
-  has_many :answers, dependent: :nullify
+  has_many :schedules, dependent: :destroy
+  has_many :answers, dependent: :destroy
   has_many :schedules, through: :answers
   
   def User.new_token
