@@ -5,7 +5,6 @@ class UsersController < ApplicationController
     @schedules = Schedule.where(user_id: current_user.id).order('created_at DESC')
     @schedule = Schedule.find_by(user_id: current_user.id)
     @user = current_user
-    @answers = Answer.all
   end
 
   def new
@@ -16,13 +15,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      numbering(@user)
       flash[:success] = 'ユーザを登録しました。'
       redirect_to @user
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
     end
-    numbering(@user)
   end
 
   def update
