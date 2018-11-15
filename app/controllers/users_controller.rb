@@ -2,7 +2,9 @@ class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show]
   
   def show
-    @schedules = current_user.schedules.order('created_at DESC').page(params[:page])
+    @schedules = Schedule.where(user_id: current_user.id).order('created_at DESC')
+    @schedule = Schedule.find_by(user_id: current_user.id)
+    @user = current_user
   end
 
   def new
@@ -13,13 +15,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      numbering(@user)
       flash[:success] = 'ユーザを登録しました。'
       redirect_to @user
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
     end
-    numbering(@user)
   end
 
   def update
@@ -34,6 +36,13 @@ class UsersController < ApplicationController
   end
 
   def edit
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+     @user.destroy
+      flash[:success] = '退会しました'
+      redirect_to root_url
   end
   
   private
