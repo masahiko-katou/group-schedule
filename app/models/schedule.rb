@@ -6,6 +6,6 @@ class Schedule < ApplicationRecord
   validates :location, length: {maximum: 255}
   validates :detail, length: {maximum: 255}
   
-  has_many :answers, dependent: :nullify
+  has_many :answers, dependent: :destroy
   
 end
