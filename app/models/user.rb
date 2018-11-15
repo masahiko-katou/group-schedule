@@ -6,7 +6,6 @@ class User < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
                     uniqueness: { case_sensitive: false }
   has_secure_password
-  
   has_many :schedules
   has_many :answers, dependent: :nullify
   has_many :schedules, through: :answers
