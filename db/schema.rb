@@ -44,11 +44,9 @@ ActiveRecord::Schema.define(version: 20181028034539) do
     t.string   "part"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "Instrument_id"
     t.integer  "instrument"
     t.integer  "section"
     t.string   "remember_digest"
-    t.index ["Instrument_id"], name: "index_users_on_Instrument_id", using: :btree
   end
 
   add_foreign_key "answers", "schedules"
