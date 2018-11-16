@@ -7,19 +7,19 @@ class AnswersController < ApplicationController
     @answer.update(answer_params)
     if @answer.status == '×' || @answer.status == '△'
       if @answer.save(context: :absent)
-        flash[:success] = '回答を送信しました。'
+        flash[:success] = '回答を送信しました'
         redirect_to root_path
       else
         current_user.deaction(schedule)
-        flash[:danger] = '回答を送れませんでした（理由が書かれていないかも）'
+        flash[:danger] = '回答を送れませんでした（理由が書かれていないかもしれません）'
         redirect_to root_path
       end
     else
       if @answer.save
-        flash[:success] = '回答を送信しました。'
+        flash[:success] = '回答を送信しました'
         redirect_to root_path
       else
-        flash[:danger] = '回答を送れませんでした(´・ω・`)ｼｮﾎﾞｰﾝ'
+        flash[:danger] = '回答を送れませんでした'
         redirect_to root_path
       end
     end
@@ -27,7 +27,7 @@ class AnswersController < ApplicationController
 
   def destroy
     schedule = Schedule.find(params[:schedule_id])
-    current_user.deaction(schedule)
+    current_user.unreaction(schedule)
     flash[:success] = '回答をリセットしました。' 
     redirect_to root_path
   end

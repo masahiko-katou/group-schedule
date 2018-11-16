@@ -18,13 +18,13 @@ class User < ApplicationRecord
     self.answers.find_or_create_by(schedule_id: schedule.id)
   end
   
-  def deaction(schedule)
+  def unreaction(schedule)
     answer = self.answers.find_by(schedule_id: schedule.id)
     answer.destroy if answer
   end
   
-  def reaction?(aschedule)
-    self.schedules.include?(aschedule)
+  def reaction?(schedule)
+    self.schedules.include?(schedule)
   end
   
   def User.digest(string)
@@ -44,36 +44,5 @@ class User < ApplicationRecord
   
   def forget
     update_attribute(:remember_digest, nil)
-  end
-  
-  def numbering(user)
-    case user.part
-    when "ヴァイオリン" then
-      user.update(instrument: 1, section: 1)
-    when "ヴィオラ" then
-      user.update(instrument: 2, section: 1)
-    when "チェロ" then
-      user.update(instrument: 3, section: 2)
-    when "コントラバス" then
-      user.update(instrument: 4, section: 2)
-    when "フルート" then
-      user.update(instrument: 5, section: 3)
-    when "オーボエ" then
-      user.update(instrument: 6, section: 3)
-    when "クラリネット" then
-      user.update(instrument: 7, section: 3)
-    when "ファゴット" then
-      user.update(instrument: 8, section: 3)
-    when "ホルン" then
-      user.update(instrument: 9, section: 4)
-    when "トランペット" then
-      user.update(instrument: 10, section: 4)
-    when "トロンボーン" then
-      user.update(instrument: 11, section: 4)
-    when "チューバ" then
-      user.update(instrument: 12, section: 4)
-    when "その他" then
-      user.update(instrument: 13, section: 5)
-    end
   end
 end
