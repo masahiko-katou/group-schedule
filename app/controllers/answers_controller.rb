@@ -10,7 +10,7 @@ class AnswersController < ApplicationController
         flash[:success] = '回答を送信しました'
         redirect_to root_path
       else
-        current_user.deaction(schedule)
+        current_user.unreaction(schedule)
         flash[:danger] = '回答を送れませんでした（理由が書かれていないかもしれません）'
         redirect_to root_path
       end

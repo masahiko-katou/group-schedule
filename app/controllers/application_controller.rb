@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def counts(user)
-    @count_schedules = user.schedule.count
+  def counts(schedule)
+    @attend_counts = schedule.answers.where(status: "◯").count
+    @late_counts = schedule.answers.where(status: "△").count
+    @absent_counts = schedule.answers.where(status: "×").count
   end
 end

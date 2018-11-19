@@ -8,14 +8,20 @@
 
 <div>
   <%= link_to '一覧に戻る', schedules_path, class: 'btn btn-primary' %>
+  <%= link_to '編集する', edit_schedule_path(@schedule), class: 'btn btn-success' %>
   <% if current_user == @schedule.user %>
-    <%= link_to '編集する', edit_schedule_path(@schedule), class: 'btn btn-success' %>
     <%= link_to '削除する', @schedule, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
   <% end %>
 </div>
 
 <br>
-  
+
+<div>
+  <p>出席者:<%= @attend_counts %></p>
+  <p>遅刻者:<%= @late_counts %></p>
+  <p>欠席者:<%= @absent_counts %></p>
+</div>
+
 <div class="col-xs-12">
   <ul class="nav nav-tabs nav-justified">
     <li class="<%= 'active' if current_page?(schedule_path(@schedule)) %>"><%= link_to schedule_path(@schedule) do %>パート<% end %></li>
