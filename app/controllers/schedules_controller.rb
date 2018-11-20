@@ -69,7 +69,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.find(params[:id])
     @users = User.all.order(:instrument).page(params[:page])
     @count_users = User.all
-    counts(@schedule, @users)
+    counts(@schedule, @count_users)
   end
   private
   
