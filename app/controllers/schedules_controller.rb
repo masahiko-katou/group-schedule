@@ -11,7 +11,8 @@ class SchedulesController < ApplicationController
   def show
     @schedule = Schedule.find(params[:id])
     @users = User.where(part: current_user.part).page(params[:page])
-    counts(@schedule, @users)
+    @count_users = User.where(part: current_user.part)
+    counts(@schedule, @count_users)
   end
 
   def new
@@ -56,15 +57,18 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.find(params[:id])
     if s == 3 || s == 4
       @users = User.where(["section=? or section=?", '3', '4']).order(:instrument).page(params[:page])
+      @count_users = User.where(["section=? or section=?", '3', '4'])
     else
       @users = User.where(["section=? or section=?", '1',  '2']).order(:instrument).page(params[:page])
+      @count_users = User.where(["section=? or section=?", '1',  '2'])
     end
-    counts(@schedule, @users)
+    counts(@schedule, @count_users)
   end
   
   def whole
     @schedule = Schedule.find(params[:id])
     @users = User.all.order(:instrument).page(params[:page])
+    @count_users = User.all
     counts(@schedule, @users)
   end
   private
