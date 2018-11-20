@@ -11,9 +11,17 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def counts(schedule)
-    @attend_counts = schedule.answers.where(status: "◯").count
-    @late_counts = schedule.answers.where(status: "△").count
-    @absent_counts = schedule.answers.where(status: "×").count
+  def counts(schedule, users)
+      attend = 0
+      late = 0
+      absent = 0
+    users.each do |user|
+      attend += user.answers.where(status: "◯", schedule_id: schedule.id).count
+      late += user.answers.where(status: "△", schedule_id: schedule.id).count
+      absent += user.answers.where(status: "×", schedule_id: schedule.id).count
+    end
+    @attend_counts = attend
+    @late_counts = late
+    @absent_counts= absent
   end
 end
