@@ -3,6 +3,7 @@ class Schedule < ApplicationRecord
   
   validates :user_id, presence: true, length: { maximum: 255 }
   validates :event, presence: true, length: {maximum: 50 }
+  validates :event_date, presence: true
   validate :date_cannot_be_in_the_past
   validates :location, length: {maximum: 255}
   validates :detail, length: {maximum: 255}
