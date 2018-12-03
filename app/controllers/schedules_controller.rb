@@ -4,8 +4,12 @@ class SchedulesController < ApplicationController
   require 'date'
   
   def index
-    @schedules = Schedule.where("event_date >= ?", Date.current).order(:event_date).page(params[:page])
+    @schedules = Schedule.order(:event_date).page(params[:page])
     @answers = Answer.all
+    s = Schedule.first
+    if s.event_date < Date.current
+      s.destroy
+    end
   end
   
   def show
