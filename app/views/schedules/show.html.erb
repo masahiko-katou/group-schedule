@@ -9,7 +9,7 @@
 <div>
   <%= link_to '一覧に戻る', schedules_path, class: 'btn btn-primary' %>
   <%= link_to '編集する', edit_schedule_path(@schedule), class: 'btn btn-success' %>
-  <% if current_user == @schedule.user %>
+  <% if current_user == @schedule.user || current_user.admin == true %>
     <%= link_to '削除する', @schedule, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
   <% end %>
 </div>
