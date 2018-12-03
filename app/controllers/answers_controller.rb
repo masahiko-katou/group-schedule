@@ -11,7 +11,7 @@ class AnswersController < ApplicationController
         redirect_to root_path
       else
         current_user.unreaction(schedule)
-        flash[:danger] = '回答を送れませんでした（理由が書かれていないかもしれません）'
+        flash[:danger] = '回答を送れませんでした。（理由が書かれていないかもしれません）'
         redirect_to root_path
       end
     else

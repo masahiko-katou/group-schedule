@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181028034539) do
+ActiveRecord::Schema.define(version: 20181121120654) do
 
   create_table "answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -42,11 +42,15 @@ ActiveRecord::Schema.define(version: 20181028034539) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "part"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "instrument"
     t.integer  "section"
     t.string   "remember_digest"
+    t.boolean  "admin",             default: false
+    t.string   "activation_digest"
+    t.boolean  "activated",         default: false
+    t.datetime "activated_at"
   end
 
   add_foreign_key "answers", "schedules"
