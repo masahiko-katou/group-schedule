@@ -27,6 +27,10 @@ class User < ApplicationRecord
     self.schedules.include?(schedule)
   end
   
+  def alive?
+    self.answers.exists?
+  end
+  
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost

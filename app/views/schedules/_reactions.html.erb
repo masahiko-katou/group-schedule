@@ -13,23 +13,27 @@
     </thread>
     <tbody>
       <% users.each do |user| %>
-        <tr>
-          <td><%= user.part %></td>
-          <td><%= user.name %></td>
-            <% if user.reaction?(schedule) %>
-              <% his_answer = user.answers.find_by(schedule_id: schedule.id) %>
-              <td><%= his_answer.status %></td>
-              <td><%= his_answer.comment %></td>
-            <% else %>
-              <td>ー</td>
-              <td></td>
-            <% end %>
-            <% if current_user.admin == true %>
-              <td>
-                <%= link_to '退会させる', user, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
-              </td>
-            <% end %>
-        </tr>
+        <% if user.alive? %>
+          <tr>
+            <td><%= user.part %></td>
+            <td><%= user.name %></td>
+              <% if user.reaction?(schedule) %>
+                <% his_answer = user.answers.find_by(schedule_id: schedule.id) %>
+                <td><%= his_answer.status %></td>
+                <td><%= his_answer.comment %></td>
+              <% else %>
+                <td>ー</td>
+                <td></td>
+              <% end %>
+              <% if current_user.admin == true %>
+                <td>
+                  <%= link_to '退会させる', user, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
+                </td>
+              <% end %>
+          </tr>
+        <% else %>
+          <tr></tr>
+        <% end %>
       <% end %>
     </tbody>
      <%= paginate users %>
