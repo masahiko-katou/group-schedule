@@ -2,6 +2,8 @@
   <h3 class="panel-title">
     <%= @user.name %>
   </h3>
+  <% user = current_user %>
   <p>パート：<%= @user.part %></p>
     <%= link_to 'ユーザー情報の編集', edit_user_path(current_user), class: "btn btn-success" %>
+    <%= link_to '退会する', user, method: :delete, data: { confirm: '本当に退会してよろしいですか？(退会する前に自分が作成したスケジュールが存在しないようにしてください)' }, class: 'btn btn-danger' %>
 </div>
