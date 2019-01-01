@@ -4,7 +4,7 @@ class SchedulesController < ApplicationController
   require 'date'
   
   def index
-    @schedules = Schedule.where("event_date >= ?", Date.current).order(:event_date).page(params[:page])
+    @schedules = Schedule.where("event_date >= ?", Date.current).order(:event_date).page(params[:page]).per(500)
     @answers = Answer.all
     past_schedules = Schedule.where("event_date < ?", Date.current)
     past_schedules.each do |past_schedule|
@@ -14,7 +14,7 @@ class SchedulesController < ApplicationController
   
   def show
     @schedule = Schedule.find(params[:id])
-    @users = User.where(part: current_user.part).page(params[:page])
+    @users = User.where(part: current_user.part).page(params[:page]).pre(500)
     @count_users = User.where(part: current_user.part)
     counts(@schedule, @count_users)
   end
