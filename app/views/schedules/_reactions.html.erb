@@ -5,14 +5,16 @@
         <th>パート</th>
         <th>名前</th>
         <th>回答</th>
-        <th>コメント</th>
+        <th>コメント(送信日時)</th>
         <% if current_user.admin == true %>
           <th>ユーザーの削除</th>
         <% end %>
       </tr>
     </thread>
     <tbody>
+      
       <% if current_user.admin == true %>
+      
         <% users.each do |user| %>
           <% if user.alive? %>
             <tr>
@@ -21,7 +23,7 @@
                 <% if user.reaction?(schedule) %>
                   <% his_answer = user.answers.find_by(schedule_id: schedule.id) %>
                   <td><%= his_answer.status %></td>
-                  <td><%= his_answer.comment %></td>
+                  <td><%= his_answer.comment %><%= his_answer.created_at.strftime('(%m/%d)') %></td>
                 <% else %>
                   <td>ー</td>
                   <td></td>
@@ -34,7 +36,7 @@
                 <% if user.reaction?(schedule) %>
                   <% his_answer = user.answers.find_by(schedule_id: schedule.id) %>
                   <td><%= his_answer.status %></td>
-                  <td><%= his_answer.comment %></td>
+                  <td><%= his_answer.comment %><%= his_answer.created_at.strftime('(%m/%d)') %></td>
                 <% else %>
                   <td>ー</td>
                   <td></td>
@@ -43,6 +45,7 @@
             </tr>
           <% end %>
         <% end %>
+        
       <% else %>
         <% users.each do |user| %>
         
@@ -53,7 +56,7 @@
                 <% if user.reaction?(schedule) %>
                   <% his_answer = user.answers.find_by(schedule_id: schedule.id) %>
                   <td><%= his_answer.status %></td>
-                  <td><%= his_answer.comment %></td>
+                  <td><%= his_answer.comment %><%= his_answer.created_at.strftime('(%m/%d)') %></td>
                 <% else %>
                   <td>ー</td>
                   <td></td>

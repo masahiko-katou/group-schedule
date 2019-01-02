@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     @schedules = Schedule.where(user_id: current_user.id).order('created_at DESC')
     @schedule = Schedule.find_by(user_id: current_user.id)
     @user = current_user
+    @users = User.all
   end
 
   def new
