@@ -4,7 +4,7 @@ class SchedulesController < ApplicationController
   require 'date'
   
   def index
-    @schedules = Schedule.where("event_date >= ?", Date.current).order(:event_date).page(params[:page]).per(500)
+    @schedules = Schedule.where("event_date >= ?", Date.current).order(:event_date).page(params[:page]).per(50)
     @answers = Answer.all
     past_schedules = Schedule.where("event_date < ?", Date.current)
     past_schedules.each do |past_schedule|
@@ -14,7 +14,7 @@ class SchedulesController < ApplicationController
   
   def show
     @schedule = Schedule.find(params[:id])
-    @users = User.where(part: current_user.part).page(params[:page]).per(500)
+    @users = User.where(part: current_user.part).page(params[:page]).per(70)
     @count_users = User.where(part: current_user.part)
     counts(@schedule, @count_users)
   end
@@ -60,10 +60,10 @@ class SchedulesController < ApplicationController
     s = current_user.section
     @schedule = Schedule.find(params[:id])
     if s == 3 || s == 4
-      @users = User.where(["section=? or section=?", '3', '4']).order(:instrument).page(params[:page]).per(500)
+      @users = User.where(["section=? or section=?", '3', '4']).order(:instrument).page(params[:page]).per(100)
       @count_users = User.where(["section=? or section=?", '3', '4'])
     else
-      @users = User.where(["section=? or section=?", '1',  '2']).order(:instrument).page(params[:page]).per(500)
+      @users = User.where(["section=? or section=?", '1',  '2']).order(:instrument).page(params[:page]).per(100)
       @count_users = User.where(["section=? or section=?", '1',  '2'])
     end
     counts(@schedule, @count_users)
