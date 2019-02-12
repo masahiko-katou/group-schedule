@@ -21,14 +21,15 @@
   <p>遅刻者:<%= @late_counts %></p>
   <p>欠席者:<%= @absent_counts %></p>
 </div>
+
 <br>
-<%= link_to '乗り番参照モードへ', piece_1_schedule_path(@schedule) %>
+<%= link_to '通常表示へ', schedule_path(@schedule) %>
 
   <ul class="nav nav-tabs nav-justified">
-    <li class="<%= 'active' if current_page?(schedule_path(@schedule)) %>"><%= link_to schedule_path(@schedule) do %>パート<% end %></li>
-    <li class="<%= 'active' if current_page?(section_schedule_path(@schedule)) %>"><%= link_to section_schedule_path(@schedule) do %>セクション<% end %></li>
-    <li class="<%= 'active' if current_page?(whole_schedule_path(@schedule)) %>"><%= link_to whole_schedule_path(@schedule) do %>全体<% end %></li>
+    <li class="<%= 'active' if current_page?(piece_1_schedule_path(@schedule)) %>"><%= link_to piece_1_schedule_path(@schedule) do %>前プロ<% end %></li>
+    <li class="<%= 'active' if current_page?(piece_2_schedule_path(@schedule)) %>"><%= link_to piece_2_schedule_path(@schedule) do %>中プロ<% end %></li>
+    <li class="<%= 'active' if current_page?(piece_3_schedule_path(@schedule)) %>"><%= link_to piece_3_schedule_path(@schedule) do %>メイン<% end %></li>
   </ul>
 <div class="col-xs-12">
-  <%= render 'reactions', users: @users, schedule: @schedule %>
+  <%= render 'piece3', users: @users, schedule: @schedule %>
 </div>

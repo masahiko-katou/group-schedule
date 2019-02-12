@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     member do
       get :section
       get :whole
+      get :piece_1
+      get :piece_2
+      get :piece_3
     end
   end
   resources :answers, only: [:new, :create, :destroy]

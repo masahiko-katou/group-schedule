@@ -21,6 +21,9 @@
   <p>欠席:<%= @absent_counts %></p>
 </div>
 
+<br>
+<%= link_to '乗り番参照モードへ', piece_1_schedule_path(@schedule) %>
+
 
   <ul class="nav nav-tabs nav-justified">
     <li class="<%= 'active' if current_page?(schedule_path(@schedule)) %>"><%= link_to schedule_path(@schedule) do %>パート<% end %></li>

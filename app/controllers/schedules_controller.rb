@@ -75,6 +75,28 @@ class SchedulesController < ApplicationController
     @count_users = User.all
     counts(@schedule, @count_users)
   end
+  
+  def piece_1
+    @schedule = Schedule.find(params[:id])
+    @users = User.where(["piece_1=? or piece_1=? or piece_1=?", '本乗り', 'アシ', 'トラ']).order(:instrument).page(params[:page]).per(500)
+    @count_users = User.all
+    counts(@schedule, @count_users)
+  end
+  
+  def piece_2
+    @schedule = Schedule.find(params[:id])
+    @users = User.where(["piece_2=? or piece_2=? or piece_2=?", '本乗り', 'アシ', 'トラ']).order(:instrument).page(params[:page]).per(500)
+    @count_users = User.all
+    counts(@schedule, @count_users)
+  end
+  
+  def piece_3
+    @schedule = Schedule.find(params[:id])
+    @users = User.where(["piece_3=? or piece_3=? or piece_3=?", '本乗り', 'アシ', 'トラ']).order(:instrument).page(params[:page]).per(500)
+    @count_users = User.all
+    counts(@schedule, @count_users)
+  end
+  
   private
   
   def schedule_params
