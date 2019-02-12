@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :part)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :part, :piece_1, :piece_2, :piece_3)
   end
   
   def numbering(user)
