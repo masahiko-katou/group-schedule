@@ -33,6 +33,7 @@
   </br> - 非表示状態になると、他の人から名前が見えなくなります。</li>
   <li>非表示状態が６ヶ月以上続くと、<b>自動的に退会処理が行われます</b>。</li>
 </ul>
+<p>当アプリに関するコメント、質問、要望は<a href="https://twitter.com/I_am_hikonii">ツイッター</a>のDMにて対応いたします。</p>
 <% @users.each do |user| %>
   <% unless user.alive? %>
     <% if user.updated_at - Time.now + 6.month < 0 %>
