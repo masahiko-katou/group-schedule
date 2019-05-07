@@ -12,20 +12,20 @@
       </div>
       <div class="form-group">
         <%= f.label :event_date, '日付' %>
-        <%= f.date_field :event_date, {} %>
+        <%= f.date_field( :event_date) %>
       </div>
       <div class="form-group time">
         <%= f.label :start_at, '開始' %><br>
-        <%= f.time_field :start_at, {} %>
+        <%= f.time_field(:start_at, :step => 300) %>
       </div>
       <div class="mtime"><br>〜</div>
       <div class="form-group time">
         <%= f.label :end_at, '終了' %><br>
-        <%= f.time_field :end_at, {} %>
+        <%= f.time_field(:end_at, :step => 300) %>
       </div>
       <div class="form-group location">
         <%= f.label :location, '場所' %>
-        <%= f.text_field :location, class: 'form-control' %>
+        <%= f.text_field :location , class: 'form-control' %>
       </div>
       <div class="form-group">
         <%= f.label :detail, '詳細' %>

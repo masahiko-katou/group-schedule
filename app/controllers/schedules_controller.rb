@@ -21,6 +21,10 @@ class SchedulesController < ApplicationController
 
   def new
     @schedule = current_user.schedules.build
+    @schedule.location = "音楽実習室"
+    @schedule.start_at = "2000-01-01 14:00:00"
+    @schedule.end_at = "2000-01-01 17:00:00"
+    @schedule.event = "合奏"
   end
   
   def create

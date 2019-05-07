@@ -32,6 +32,7 @@ class AnswersController < ApplicationController
     redirect_to root_path
   end
   
+  
   def answer_params
     params.require(:answer).permit(:status, :comment, :user_id, :schedule_id)
   end
