@@ -19,18 +19,18 @@
       </thread>
       <tbody>
         <% @schedules.each do |schedule| %>
-          <tr>
-            <td><% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %></td>
+          <tr id=<%= schedule.id%>>
+            <td class="date"><% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %></td>
             <% if current_user.reaction?(schedule) %>
-              <td><%= link_to  schedule.event, schedule %></td>
+              <td class="event"><%= link_to  schedule.event, schedule %></td>
             <% else %>
-              <td><%= schedule.event %></td>
+              <td class="event"><%= schedule.event %></td>
             <% end %>
-              <td><%= schedule.location %></td>
+              <td class="location"><%= schedule.location %></td>
             <% if current_user.reaction?(schedule) %>
-              <td><%= @answers.find_by(schedule_id: schedule.id, user_id: current_user.id).status %></td>
+              <td class="answer"><%= @answers.find_by(schedule_id: schedule.id, user_id: current_user.id).status %></td>
             <% else %>
-              <td>ー</td>
+              <td class="answer">ー</td>
             <% end %>
             <td><%= render 'schedules/modal', schedule: schedule %></td>
           </tr>

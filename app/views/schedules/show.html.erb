@@ -1,8 +1,8 @@
 <div>
-  <h3><%= @schedule.event %></h3>
-  <h4>場所：<%= @schedule.location%></h4>
-  <p><% date=@schedule.event_date %><%= date.strftime('%m月%d日 (%a)') %><% stime = @schedule.start_at %>   <%= stime.strftime('%H:%M') %>〜<% etime = @schedule.end_at %><%= etime.strftime('%H:%M') %></p>
-  <pre><p><%= @schedule.detail %></p></pre>
+  <h3 class="event"><%= @schedule.event %></h3>
+  <h4 class="location">場所：<%= @schedule.location%></h4>
+  <p class="date"><% date=@schedule.event_date %><%= date.strftime('%m月%d日 (%a)') %><% stime = @schedule.start_at %>   <%= stime.strftime('%H:%M') %>〜<% etime = @schedule.end_at %><%= etime.strftime('%H:%M') %></p>
+  <pre class="detail"><p><%= @schedule.detail %></p></pre>
   <p>作成者：<%= @schedule.user.name %></p>
 </div>
 
