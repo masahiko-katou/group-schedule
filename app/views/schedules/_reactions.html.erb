@@ -37,8 +37,13 @@
                   <% his_answer = user.answers.find_by(schedule_id: schedule.id) %>
                   <td><%= his_answer.status %></td>
                   <td><%= his_answer.comment %><%= his_answer.created_at.strftime('(%-m/%-d)') %></td>
-                <% else %>
+                  <td></td>
+                <% elsif user.updated_at - Time.now + 2.month < 0 %>
                   <td>ー</td>
+                  <td></td>
+                  <td></td>
+                <% else %>
+                  <td></td>
                   <td></td>
                   <td><%= link_to '退会させる', user, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %></td>
                 <% end %>
@@ -49,7 +54,7 @@
       <% else %>
         <% users.each do |user| %>
         
-          <% if user.alive? %>
+          <% if user.alive? or user.updated_at - Time.now + 2.month < 0 %>
             <tr>
               <td><%= user.part %></td>
               <td><%= user.name %></td>
