@@ -10,6 +10,7 @@ class SchedulesController < ApplicationController
     past_schedules.each do |past_schedule|
         past_schedule.destroy
     end
+    @weeks = ["日", "月", "火", "水", "木", "金", "土"]
   end
   
   def show
@@ -17,6 +18,7 @@ class SchedulesController < ApplicationController
     @users = User.where(part: current_user.part).page(params[:page]).per(70)
     @count_users = User.where(part: current_user.part)
     counts(@schedule, @count_users)
+    @weeks = ["日", "月", "火", "水", "木", "金", "土"]
   end
 
   def new
@@ -71,6 +73,7 @@ class SchedulesController < ApplicationController
       @count_users = User.where(["section=? or section=?", '1',  '2'])
     end
     counts(@schedule, @count_users)
+    @weeks = ["日", "月", "火", "水", "木", "金", "土"]
   end
   
   def whole
@@ -78,6 +81,7 @@ class SchedulesController < ApplicationController
     @users = User.all.order(:instrument).page(params[:page]).per(500)
     @count_users = User.all
     counts(@schedule, @count_users)
+    @weeks = ["日", "月", "火", "水", "木", "金", "土"]
   end
   
   def piece_1

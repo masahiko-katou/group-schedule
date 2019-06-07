@@ -1,7 +1,14 @@
 <% if logged_in? %>
-  <p>ようこそ、<%= current_user.name %>さん</p>
+  <% time_japan = Time.now.getlocal("+09:00") %>
+  <% if 5 <= time_japan.hour && time_japan.hour < 11 %>
+    <p>おはようございます、<%= current_user.name %>さん</p>
+  <% elsif 11 <= time_japan.hour && time_japan.hour < 17 %>
+    <p>こんにちは、<%= current_user.name %>さん</p>
+  <% else %>
+    <p>こんばんは、<%= current_user.name %>さん</p>
+  <% end %>
   <% if current_user.updated_at - Time.now + 5.month < 0 %>
-    <h2> !!警告!!</h2>
+    <h2> !!warning!!</h2>
     <h4>長期間ログイン処理(パスワードを入力してのログイン)がされていません。一旦ログアウトし、再ログインをおこなってください。</h4>
     <p>・６ヶ月以上ログイン処理がされていないとアカウントが削除される可能性があります。</p>
   <% end %>
@@ -20,7 +27,7 @@
       <tbody>
         <% @schedules.each do |schedule| %>
           <tr id=<%= schedule.id%>>
-            <td class="date"><% date=schedule.event_date %><%= date.strftime('%m/%d (%a)') %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %></td>
+            <td class="date", name=<% date=schedule.event_date %><%= date.strftime('%Y%m%d') %>><%= date.strftime('%-m/%-d (') %><% week = date.strftime('%u').to_i - 1 %><%= @weeks[week] %><%= ')' %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %></td>
             <% if current_user.reaction?(schedule) %>
               <td class="event"><%= link_to  schedule.event, schedule %></td>
             <% else %>

@@ -1,9 +1,9 @@
 <div>
   <h3><%= @schedule.event %></h3>
   <h4>場所：<%= @schedule.location%></h4>
-  <p><% date=@schedule.event_date %><%= date.strftime('%m月%d日 (%a)') %><% stime = @schedule.start_at %>   <%= stime.strftime('%H:%M') %>〜<% etime = @schedule.end_at %><%= etime.strftime('%H:%M') %></p>
+  <p><% date=@schedule.event_date %><%= date.strftime('%-m月%-d日(') %><%= @weeks[ date.strftime('%u').to_i - 1]%><%= ')'%><% stime = @schedule.start_at %>   <%= stime.strftime('%H:%M') %>〜<% etime = @schedule.end_at %><%= etime.strftime('%H:%M') %></p>
   <pre><p><%= @schedule.detail %></p></pre>
-  <p>作成者：<%= @schedule.user.name %></p>
+  <p>最終編集者：<%= @schedule.user.name %></p>
 </div>
 
 <div>
@@ -17,9 +17,9 @@
 <br>
 
 <div>
-  <p>出席者:<%= @attend_counts %></p>
-  <p>遅刻者:<%= @late_counts %></p>
-  <p>欠席者:<%= @absent_counts %></p>
+  <p>出席:<%= @attend_counts %></p>
+  <p>遅刻:<%= @late_counts %></p>
+  <p>欠席:<%= @absent_counts %></p>
 </div>
 <br>
 <%= link_to '乗り番参照モードへ', piece_1_schedule_path(@schedule) %>
