@@ -27,7 +27,7 @@
       <tbody>
         <% @schedules.each do |schedule| %>
           <tr id=<%= schedule.id%>>
-            <td class="date", name=<% date=schedule.event_date %><%= date.strftime('%Y%m%d') %>><%= date.strftime('%-m/%-d (') %><% week = date.strftime('%u').to_i - 1 %><%= @weeks[week] %><%= ')' %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %></td>
+            <td class="date" name=<% date=schedule.event_date %><%= date.strftime('%Y%m%d') %>><%= date.strftime('%-m/%-d (') %><% week = date.strftime('%u').to_i - 1 %><%= @weeks[week] %><%= ')' %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %></td>
             <% if current_user.reaction?(schedule) %>
               <td class="event"><%= link_to  schedule.event, schedule %></td>
             <% else %>
