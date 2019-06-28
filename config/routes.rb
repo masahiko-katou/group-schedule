@@ -17,5 +17,5 @@ Rails.application.routes.draw do
       get :piece_3
     end
   end
-  resources :answers, only: [:new, :create, :destroy]
+  resources :answers, only: [:new, :create, :destroy, :update, :edit]
 end

@@ -24,6 +24,35 @@ class AnswersController < ApplicationController
       end
     end
   end
+  
+  def edit
+    schedule = Schedule.find_by(params[:schedule_id])
+    @answer = current_user.answers.find(schedule_id: schedule.id)
+  end
+  
+  def update
+    schedule = Schedule.find(params[:schedule_id])
+    @answer = current_user.answers.find_by(schedule_id: schedule.id)
+    @answer.update(answer_params)
+    if @answer.status == '×' || @answer.status == '△'
+      if @answer.save(context: :absent)
+        flash[:success] = '回答を送信しました'
+        redirect_to root_path
+      else
+        current_user.unreaction(schedule)
+        flash[:danger] = '回答を送れませんでした。（理由が書かれていないかもしれません）'
+        redirect_to root_path
+      end
+    else
+      if @answer.save
+        flash[:success] = '回答を送信しました'
+        redirect_to root_path
+      else
+        flash[:danger] = '回答を送れませんでした'
+        redirect_to root_path
+      end
+    end
+  end
 
   def destroy
     schedule = Schedule.find(params[:schedule_id])
