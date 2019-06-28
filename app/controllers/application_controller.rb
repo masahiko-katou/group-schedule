@@ -2,6 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include SessionsHelper
+  include AnswersHelper
+  
+  helper_method :all_attend
   
   private
 
