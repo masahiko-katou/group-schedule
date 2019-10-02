@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped">
+      <thread>
+        <tr>
+          <th>日時</th>
+          <th>内容</th>
+          <th>場所</th>
+          <th>詳細時間</th>
+          <th>詳細</th>
+        </tr>
+      </thread>
+      <tbody>
+        <% @schedules.each do |schedule| %>
+          <tr id=<%= schedule.id%>>
+            <td class="date" name=<% date=schedule.event_date %><%= date.strftime('%Y%m%d') %>><%= date.strftime('%-m/%-d (') %><% week = date.strftime('%u').to_i - 1 %><%= @weeks[week] %><%= ')' %><br><% stime = schedule.start_at %><%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %></td>
+            <td class="event"><%= schedule.event %></td>
+            <td class="location">場所：<%= schedule.location %></td>
+            <td class="datedetail" name=<% date=schedule.event_date %><%= date.strftime('%m%d') %>><%= date.strftime('%-m月%-d日(') %><%= @weeks[ date.strftime('%u').to_i - 1]%><%= ')'%><% stime = schedule.start_at %>   <%= stime.strftime('%H:%M') %>〜<% etime = schedule.end_at %><%= etime.strftime('%H:%M') %></td>
+            <td class="detail"><pre><%= schedule.detail %></pre></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

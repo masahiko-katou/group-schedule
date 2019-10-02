@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   
   get 'todaiphil', to: 'users#new'
+  get 'uraindex', to: 'sessions#uraindex'
   
   resources :users, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :schedules do

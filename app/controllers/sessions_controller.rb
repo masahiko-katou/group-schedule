@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  require 'date'
+  
   def new
   end
   
@@ -9,7 +11,7 @@ class SessionsController < ApplicationController
       remember user
       redirect_to user
     else
-      flash.now[:danger] = 'ログインに失敗しました'
+      flash.now[:danger] = 'ログインに失敗しました。パスワードが間違っているか、登録されていないメールアドレスを入力している可能性があります。'
       render 'new'
     end
   end
@@ -19,6 +21,11 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     flash[:success] = 'ログアウトしました。'
     redirect_to root_url
+  end
+  
+  def uraindex
+    @schedules = Schedule.all.order(:event_date)
+    @weeks = ["月", "火", "水", "木", "金", "土", "日"]
   end
   
   private
