@@ -7,11 +7,6 @@
   <% else %>
     <p>こんばんは、<%= current_user.name %>さん</p>
   <% end %>
-  <% if current_user.updated_at - Time.now + 5.month < 0 %>
-    <h2> !!warning!!</h2>
-    <h4>長期間ログイン処理(パスワードを入力してのログイン)がされていません。一旦ログアウトし、再ログインをおこなってください。</h4>
-    <p>・６ヶ月以上ログイン処理がされていないとアカウントが削除される可能性があります。</p>
-  <% end %>
 <div class="row">
   <div class="col-xs-12">
     <table class="table table-striped">

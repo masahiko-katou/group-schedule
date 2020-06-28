@@ -32,11 +32,4 @@
   <li>非表示状態が６ヶ月以上続くと、<b>自動的に退会処理が行われます</b>。</li>
 </ul>
 <p>当アプリに関するコメント、質問、要望は<a href="https://twitter.com/I_am_hikonii">ツイッター</a>のDMにて対応いたします。</p>
-<% @users.each do |user| %>
-  <% unless user.alive? %>
-    <% if user.updated_at - Time.now + 8.month < 0 %>
-      <% user.destroy %>
-    <% end %>
-  <% end %>
-<% end %>
 
